@@ -1,6 +1,6 @@
 const { Schema, model } = require("mongoose");
 
-const minigameSchema = new Schema({
+const gameSchema = new Schema({
     imagen: {
         type: String,
         default: "https://happylearning.tv/wp-content/uploads/2017/11/portada_seccion_juegos-01.png"
@@ -24,9 +24,9 @@ const minigameSchema = new Schema({
     }
 })
 
-const MinigameModel = model("minigame", minigameSchema);
+const GameModel = model("game", gameSchema);
 
-module.exports = MinigameModel;
+module.exports = GameModel;
 
 
 
