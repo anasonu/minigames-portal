@@ -1,5 +1,8 @@
 const router = require("express").Router();
+const { route } = require("express/lib/application");
 const UserModel = require("../models/User.model.js")
+
+// ------ RUTAS DE REGISTRO ------
 
 // GET "/signup" => Renderizar el formulario de registro
 router.get("/", (req, res, next) => {
@@ -46,5 +49,7 @@ router.post("/", async (req, res, next) => {
             password,
         })
 })
+
+
 
 module.exports = router;
