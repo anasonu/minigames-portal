@@ -1,0 +1,23 @@
+<h1> Pagina de edicion del juego </h1>
+
+
+<form action="/games/{{gameEdit._id}}/edit" method="POST">
+    <label for="titulo"> Titulo: </label>
+    <input type="text" name="titulo" value="{{gameEdit.titulo}}" />
+    <br />
+    <label for="creador"> Creador: </label>
+    <input type="text" name="creador" value="{{gameEdit.creador}}" />
+    <br />
+    <label for="descripcion"> Descripción: </label>
+    <input type="text" name="descripcion" value="{{gameEdit.descripcion}}" />
+    <br />
+    <label for="url"> URL: </label>
+    <input type="text" name="url" value="{{gameEdit.url}}" />
+    <br />
+
+    <button> Editar </button>
+    
+</form>
+
+{{!-- <img src="{{gameDetails.imagen}}" alt="img" width="200px"> <br /> --}}
+
