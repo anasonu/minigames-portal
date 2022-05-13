@@ -8,5 +8,7 @@ router.get("/", (req, res, next) => {
 const gameRoutes = require("./games.routes.js")
 router.use("/games", gameRoutes)
 
+const authRoutes = require("./auth.routes.js");
+router.use("/auth", authRoutes);
 
 module.exports = router;
