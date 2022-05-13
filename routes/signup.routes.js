@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const { route } = require("express/lib/application");
 const UserModel = require("../models/User.model.js")
+const bcryptjs = require("bcryptjs");
 
 // ------ RUTAS DE REGISTRO ------
 
@@ -43,10 +44,13 @@ router.post("/", async (req, res, next) => {
         next(err);
     }
 
+    const salt = await bcryptjs.genSalt(10)
+    const hashPassword = await bcryptjs.hash(password, salt)
+
     const signedUpUser = await UserModel.create({
             username,
             email,
-            password,
+            password: hashPassword,
         })
 })
 
