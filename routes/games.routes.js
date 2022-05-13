@@ -2,19 +2,6 @@ const router = require("express").Router();
 
 const GameModel = require("../models/Game.model.js");
 
-// GET "/games" => lista de todos los juegos
-// router.get("/", (req,res,next) => {
-//     GameModel.find()
-//     .then((allGames) => {
-//         res.render("games/list.hbs", {
-//             listGames: allGames
-//         })
-//     })
-//     .catch((err) => {
-//         next(err);
-//     })
-// })
-
 // GET "/games/create" => renderiza formulario de añadir un juego
 router.get("/create", (req, res, next) => {
     res.render("games/add.hbs")
@@ -23,7 +10,7 @@ router.get("/create", (req, res, next) => {
 // POST "/games/create" => añade un objeto a la coleccion de juegos de la bd, y redirecciona al listado
 router.post("/create", async (req,res,next) => {
     const { titulo, creador, descripcion, url } = req.body;
-
+    
     try {
         const game = await GameModel.create( {
             titulo,
