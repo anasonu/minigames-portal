@@ -3,18 +3,17 @@ const router = require("express").Router();
 const GameModel = require("../models/Game.model.js");
 
 // GET "/games" => lista de todos los juegos
-router.get("/", (req,res,next) => {
-
-    GameModel.find()
-    .then((allGames) => {
-        res.render("games/list.hbs", {
-            listGames: allGames
-        })
-    })
-    .catch((err) => {
-        next(err);
-    })
-})
+// router.get("/", (req,res,next) => {
+//     GameModel.find()
+//     .then((allGames) => {
+//         res.render("games/list.hbs", {
+//             listGames: allGames
+//         })
+//     })
+//     .catch((err) => {
+//         next(err);
+//     })
+// })
 
 // GET "/games/create" => renderiza formulario de añadir un juego
 router.get("/create", (req, res, next) => {

@@ -1,5 +1,13 @@
 <h1> Listado de juegos </h1>
 
+
 {{#each listGames}}
-    <li><a href="/games/{{this.id}}/details">{{this.titulo}}</a></li>
+    <div class="eachGame">
+        <img src="{{this.imagen}}" alt="img" width="200px"> <br>
+        <a href="/games/{{this.id}}/details">{{this.titulo}}</a> <br>
+        <p> {{this.creador}} </p>
+        <p> {{this.descripcion}} </p>
+        <p> <a href="{{this.url}}"> Enlace al juego</a></p>
+            
+    </div>
 {{/each}}
