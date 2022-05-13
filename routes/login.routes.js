@@ -1,6 +1,9 @@
 const router = require("express").Router();
 const UserModel = require("../models/User.model.js")
 const bcryptjs = require("bcryptjs");
+const session = require('express-session');
+const isLoggedin = require("../middleware/auth.middleware.js")
+
 
 // ------ RUTAS DE INICIO DE SESIÓN ------
 
@@ -38,6 +41,8 @@ router.post("/", async (req, res, next) => {
             })
             return;
         }
+
+        // console.log(req.session)
         
         res.redirect("/profile")
 
