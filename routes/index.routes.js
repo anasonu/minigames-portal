@@ -9,6 +9,6 @@ const gameRoutes = require("./games.routes.js")
 router.use("/games", gameRoutes)
 
 const authRoutes = require("./auth.routes.js");
-router.use("/auth", authRoutes);
+router.use("/signup", authRoutes);
 
 module.exports = router;
