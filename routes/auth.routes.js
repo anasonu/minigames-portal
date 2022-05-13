@@ -15,23 +15,23 @@ router.post("/", async (req, res, next) => {
         res.render("auth/signup.hbs", {
             errorMessage: "¡Ups! Parece que hay campos sin rellenar"
         })
+        return;
     }
 
     try{
         const signedUpUser = await UserModel.findOne({
-            $or: [{
-                email, 
-                username,
-            }]
+            $or: [
+                {email: email}, 
+                {username: username},
+            ]
         })
-
-        if(signedUpUser) {
+        
+        if(signedUpUser !== null) {
             res.render("auth/signup.hbs", {
                 errorMessage: "Ya existe un usuario con ese nombre :("
             })
-        } else {
             return;
-        }
+        } 
         
         res.redirect("/login")
 
