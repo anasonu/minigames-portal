@@ -61,22 +61,24 @@ router.get("/:id/edit", (req, res, next) => {
 
 
 // POST "/games/:id/edit" => edita los datos del juego seleccionado
-// router.get("/:id/edit", (req, res, next) => {
-//     const { id } = req.params
+router.post("/:id/edit", (req, res, next) => {
+    const { id } = req.params
 
-//     const { titulo, creador, descripcion, url } = req.body;
+    const { titulo, creador, descripcion, url } = req.body;
 
-//     GameModel.findByIdAndUpdate(id, {
-//         titulo, 
-//         creador, 
-//         descripcion, 
-//         url
-//     })
-//     .then((gameUpdate) => {
-//         res.render(`games/details.hbs`)
-//     })
-    
-// })
+    GameModel.findByIdAndUpdate(id, {
+        titulo, 
+        creador, 
+        descripcion, 
+        url
+    })
+    .then((gameUpdate) => {
+        res.redirect(`/games/${id}/details`)
+    })
+    .catch((err) => {
+        next(err)
+    })
+})
 
 
 module.exports = router;
