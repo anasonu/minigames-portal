@@ -6,6 +6,8 @@
 {{gameDetails.descripcion}} <br />
 {{gameDetails.url}} <br />
 
-<a href="/games/{{gameDetails._id}}/edit">
-    <button> Editar </button>
-</a>
+{{#if esCreador}}
+    <a href="/games/{{gameDetails._id}}/edit">
+        <button> Editar </button>
+    </a>
+{{/if}}
