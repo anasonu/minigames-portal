@@ -113,9 +113,7 @@ router.post("/:id/delete", isLoggedin, async (req, res, next) => {
         next(err)
     }
     
-
-
-
 })
+
 
 module.exports = router;

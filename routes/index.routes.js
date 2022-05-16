@@ -15,8 +15,13 @@ router.get("/", (req, res, next) => {
   })
 });
 
+
 const gameRoutes = require("./games.routes.js")
 router.use("/games", gameRoutes)
+
+
+const profileRoutes = require("./profile.routes.js")
+router.use("/profile", profileRoutes)
 
 // ----- RUTAS DE REGISTRO -----
 const signupRoutes = require("./signup.routes.js");
