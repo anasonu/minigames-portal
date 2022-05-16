@@ -1,8 +1,8 @@
 const router = require("express").Router();
 const UserModel = require("../models/User.model.js")
 const bcryptjs = require("bcryptjs");
-const session = require('express-session');
-const isLoggedin = require("../middleware/auth.middleware.js")
+// const session = require('express-session');
+// const isLoggedin = require("../middleware/auth.middleware.js")
 
 
 // ------ RUTAS DE INICIO DE SESIÓN ------
@@ -42,7 +42,9 @@ router.post("/", async (req, res, next) => {
             return;
         }
 
-        // console.log(req.session)
+        console.log(req.session)
+        req.session.user = registeredUser;
+        req.app.locals.userIsActive = true;
         
         res.redirect("/profile")
 
