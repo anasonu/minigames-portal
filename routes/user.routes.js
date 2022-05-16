@@ -31,6 +31,41 @@ router.get("/:id", (req, res, next) => {
 })
 
 
+// GET "/user/:id/edit" => Renderizar formulario de edición de usuario
+router.get("/:id/edit", (req, res, next) => {
+    const {id} = req.params;
+    
+    UserModel.findById(id)
+    .then((user) => {
+        res.render("users/edit-user-detail.hbs", {
+            userEdit: user,
+        })
+    })
+    .catch((err) => {
+        next(err);
+    })
+})
+
+// POST "/user/:id/edit" => Enviar formulario y guardar los cambios
+router.post("/:id/edit", (req, res, next) => {
+    const {id} = req.params;
+    console.log(req.body)
+    const {username, email, admin} = req.body;
+    
+    UserModel.findByIdAndUpdate(id, {
+        username,
+        email,
+        admin
+    })
+    .then((updatedUser) => {
+        res.redirect(`/user/${id}`);
+    })
+    .catch((err) => {
+        next(err);
+    })
+})
+
+
 
 
 module.exports = router;

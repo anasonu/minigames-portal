@@ -1,0 +1,17 @@
+<h2>Edit user detail</h2>
+
+<form action="/user/{{userEdit._id}}/edit" method="POST">
+    <label for="username">Username: </label>
+    <input type="text" name="username" value="{{userEdit.username}}">
+    <br>
+    <br>
+    <label for="email">Correo electrónico: </label>
+    <input type="email" name="email" value="{{userEdit.email}}">
+    <br>
+    <br>
+    <label for="admin">Administrador: </label>
+    <input type="text" name="admin" value="{{userEdit.admin}}">
+    <br>
+    <br>
+    <button>Guardar cambios</button>
+</form>
