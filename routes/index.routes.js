@@ -32,7 +32,7 @@ const loginRoutes = require("./login.routes.js");
 router.use("/login", loginRoutes);
 
 // ----- RUTAS DE ACCESO AL ADMINISTRADOR -----
-const userRoutes = require("./user.routes");
+const userRoutes = require("./user.routes.js");
 router.use("/user", userRoutes);
 
 module.exports = router;

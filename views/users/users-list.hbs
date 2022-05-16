@@ -1,5 +1,12 @@
 <h2>Users list</h2>
 
+<a href="/user/create">
+    <button>Crea un nuevo usuario</button>
+</a>
+
+<br>
+<br>
+
 {{#each userList}}
     <a href="/user/{{this._id}}">
         <li>{{this.username}}</li>
