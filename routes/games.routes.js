@@ -1,8 +1,7 @@
 const router = require("express").Router();
 
 const GameModel = require("../models/Game.model.js");
-const UserModel = require("../models/User.model.js");
-const { isLoggedin } = require("../middleware/auth.middleware.js") ;
+const { isLoggedin } = require("../middleware/auth.middleware.js");
 
 
 // GET "/games/create" => renderiza formulario de añadir un juego
@@ -37,17 +36,18 @@ router.get("/:id/details", (req,res,next) => {
     const { id } = req.params;
 
     req.app.locals.esCreador = false;
-    console.log("1:", req.app.locals.esCreador)
-    console.log("2:", req.session.user._id)
+    //console.log("1:", req.app.locals.esCreador)
+    //console.log("2:", req.session.user.username)
 
-    GameModel.findById(id)
+    GameModel.findById(id).populate("creador")
     .then((game) => {
+        //console.log("prueba", game.creador.username);
         //console.log("3:", game.creador._id.toString())
-        const idCreador = game.creador._id.toString()
-        console.log("3:", idCreador)
-        if (req.session.user._id === idCreador) {
+        //const idCreador = game.creador._id.toString()
+        //console.log("3:", idCreador)
+        if (req.session.user.username === game.creador.username) {
             req.app.locals.esCreador = true;
-            console.log("4:", req.app.locals.esCreador)
+            //console.log("4:", req.app.locals.esCreador)
         }
         res.render("games/details.hbs", {
             gameDetails: game
