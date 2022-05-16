@@ -5,5 +5,12 @@ module.exports = {
         } else {
             next();
         }
-    }
+    },
+    // isCreator: (req, res, next) => {
+    //     if(req.session.user._id === creador) {
+    //         next();
+    //     } else {
+    //         return;
+    //     }
+    // }
 }

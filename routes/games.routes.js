@@ -2,7 +2,7 @@ const router = require("express").Router();
 
 const { render } = require("express/lib/response");
 const GameModel = require("../models/Game.model.js");
-const { isLoggedin } = require("../middleware/auth.middleware.js") ;
+const { isLoggedin } = require("../middleware/auth.middleware.js");
 
 
 // GET "/games/create" => renderiza formulario de añadir un juego
@@ -36,9 +36,20 @@ router.post("/create", async (req,res,next) => {
 // GET "/games/:id/details" => muestra los detalles del juego seleccionado
 router.get("/:id/details", (req,res,next) => {
     const { id } = req.params;
+    
+    req.app.locals.esCreador = false;
+    console.log("1:", req.app.locals.esCreador)
+    console.log("2:", req.session.user._id)
 
     GameModel.findById(id)
     .then((game) => {
+        console.log("3:", game.creador)
+        const idCreador = GameModel.findById(id).populate("creador")
+        console.log("idCreador:", idCreador)
+        if (req.session.user._id === idCreador) {
+            console.log("4:", req.app.locals.esCreador)
+            req.app.locals.esCreador = true;
+        }
         res.render("games/details.hbs", {
             gameDetails: game
         })
