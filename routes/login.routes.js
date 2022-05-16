@@ -42,7 +42,6 @@ router.post("/", async (req, res, next) => {
             return;
         }
 
-        console.log(req.session)
         req.session.user = registeredUser;
         req.app.locals.userIsActive = true;
         

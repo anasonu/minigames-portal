@@ -10,7 +10,8 @@ const gameSchema = new Schema({
         required: true
     },
     creador: {
-        type: String,
+        type: Schema.Types.ObjectId,
+        ref: "user",
         required: true
     },
     descripcion: {

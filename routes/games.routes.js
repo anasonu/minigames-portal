@@ -2,20 +2,25 @@ const router = require("express").Router();
 
 const { render } = require("express/lib/response");
 const GameModel = require("../models/Game.model.js");
+const { isLoggedin } = require("../middleware/auth.middleware.js") ;
+
 
 // GET "/games/create" => renderiza formulario de añadir un juego
-router.get("/create", (req, res, next) => {
+router.get("/create", isLoggedin, (req, res, next) => {
+    // console.log(req.session.user)
+    const {_id} = req.session.user;
     res.render("games/add.hbs")
 })
 
 // POST "/games/create" => añade un objeto a la coleccion de juegos de la bd, y redirecciona al listado
 router.post("/create", async (req,res,next) => {
     const { titulo, creador, descripcion, url } = req.body;
-
+    const {_id} = req.session.user;
+    // console.log(req.session.user.username)
     try {
         const game = await GameModel.create( {
             titulo,
-            creador,
+            creador: _id,
             descripcion,
             url
         })
@@ -44,7 +49,7 @@ router.get("/:id/details", (req,res,next) => {
 })
 
 // GET "/games/:id/edit" => pagina de edicion del juego seleccionado
-router.get("/:id/edit", (req, res, next) => {
+router.get("/:id/edit", isLoggedin, (req, res, next) => {
     const { id } = req.params
 
     GameModel.findById(id)
@@ -82,7 +87,7 @@ router.post("/:id/edit", (req, res, next) => {
 
 
 // POST "/games/:id/delete" => borra el juego seleccionado
-router.post("/:id/delete", async (req, res, next) => {
+router.post("/:id/delete", isLoggedin, async (req, res, next) => {
     const { id } = req.params;
 
     try {
