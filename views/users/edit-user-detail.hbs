@@ -10,7 +10,11 @@
     <br>
     <br>
     <label for="admin">Administrador: </label>
-    <input type="text" name="admin" value="{{userEdit.admin}}">
+    <select name="admin">
+        <option value="false">false</option>
+        <option value="true">true</option>
+    </select>
+    {{!-- <input type="text" name="admin" value="{{userEdit.admin}}"> --}}
     <br>
     <br>
     <button>Guardar cambios</button>
