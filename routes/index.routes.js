@@ -27,7 +27,7 @@ const loginRoutes = require("./login.routes.js");
 router.use("/login", loginRoutes);
 
 // ----- RUTAS DE ACCESO AL ADMINISTRADOR -----
-const adminRoutes = require("./admin.routes");
-router.use("/admin", adminRoutes);
+const userRoutes = require("./user.routes");
+router.use("/user", userRoutes);
 
 module.exports = router;
