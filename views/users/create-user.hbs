@@ -1,0 +1,24 @@
+<h2>Crea un nuevo usuario</h2>
+
+<form action="/user/create" method="post">
+    <label for="username">Username: </label>
+    <input type="text" name="username">
+    <br>
+    <br>
+    <label for="email">Email: </label>
+    <input type="text" name="email">
+    <br>
+    <br>
+    <label for="password">Password: </label>
+    <input type="password" name="password">
+    <br>
+    <br>
+    <label for="admin">Admin: </label>
+    <select name="admin">
+        <option value="false">false</option>
+        <option value="true">true</option>
+     </select>
+    <br>
+    <br>
+    <button>Guardar</button>
+</form>
