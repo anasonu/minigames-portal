@@ -81,4 +81,22 @@ router.post("/:id/edit", (req, res, next) => {
 })
 
 
+// POST "/games/:id/delete" => borra el juego seleccionado
+router.post("/:id/delete", async (req, res, next) => {
+    const { id } = req.params;
+
+    try {
+        await GameModel.findByIdAndDelete(id)
+
+        res.redirect("/")
+    }
+    catch (err) {
+        next(err)
+    }
+    
+
+
+
+})
+
 module.exports = router;
