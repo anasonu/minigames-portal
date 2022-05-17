@@ -9,10 +9,14 @@ const bcryptjs = require("bcryptjs");
 router.get("/", isLoggedin, (req, res, next) => {
     const userID = req.session.user._id;
 
-    UserModel.findById(userID)
+    UserModel.findById(userID).populate("favoritos")
     .then((user) => {
         //console.log("info user: ", user)
-        GameModel.find().populate("creador")
+        let juegosFavoritos = [];
+        for (let i=0; i< user.favoritos.length; i++) {
+            juegosFavoritos.push(user.favoritos[i]);
+        }
+    GameModel.find().populate("creador")
         .then((allGames) => {
             //console.log(allGames)
             let juegosPropios = [];
@@ -23,7 +27,8 @@ router.get("/", isLoggedin, (req, res, next) => {
             }
             res.render("profile/profile.hbs", {
                 userInfo: user,
-                gamesInfo: juegosPropios
+                gamesInfo: juegosPropios,
+                favInfo: juegosFavoritos
             })
 
         })

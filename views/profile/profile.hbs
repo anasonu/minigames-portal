@@ -1,18 +1,24 @@
 <h1> Tu perfil </h1>
-    <h3> {{userInfo.username}} </h3>
-    <h3> {{userInfo.email}} </h3>
+<h3> {{userInfo.username}} </h3>
+<h3> {{userInfo.email}} </h3>
 
-    <a href="/profile/{{userInfo._id}}/edit">
-        <button> Editar </button>
-    </a>
+<a href="/profile/{{userInfo._id}}/edit">
+    <button> Editar </button>
+</a>
 
     
 <h1> Tus juegos </h1>
-    {{#each gamesInfo}}
-        <img src="{{this.imagen}}" alt="img" width="200px" />
-        <h3> Titulo: {{this.titulo}}</h3>
-        <p> Descripción:{{this.descripcion}}</p>
-        <p> URL:{{this.url}}</p>
-    {{/each}}
+{{#each gamesInfo}}
+    <img src="{{this.imagen}}" alt="img" width="200px" />
+    <h3> Titulo: {{this.titulo}}</h3>
+    <p> Descripción:{{this.descripcion}}</p>
+    <p> URL:{{this.url}}</p>
+{{/each}}
 
 <h1> Tus favoritos </h1>
+{{#each favInfo}}
+    <img src="{{this.imagen}}" alt="img" width="200px" />
+    <h3> Titulo: {{this.titulo}}</h3>
+    <p> Descripción:{{this.descripcion}}</p>
+    <p> URL:{{this.url}}</p>
+{{/each}}
