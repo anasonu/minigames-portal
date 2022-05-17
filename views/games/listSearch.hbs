@@ -1,0 +1,8 @@
+<h1> Buscador de juegos </h1>
+{{#each gameSearch}}
+    <img src="{{this.imagen}}" alt="img" width="200px"> <br />
+    {{this.titulo}} <br />
+    {{this.creador.username}} <br />
+    {{this.descripcion}} <br />
+    {{this.url}} <br />
+{{/each}}

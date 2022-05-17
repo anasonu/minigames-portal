@@ -35,6 +35,11 @@
             <a href="/user/create">Crear usuarios</a>
          {{/if}}
 
+
+      <form action="/games/listSearch" method="POST">
+         <input type="text" name="buscador" placeholder="Busca el juego que quieras">
+         <button> Buscar </button>
+      </form>
       </nav>
 
       {{{body}}}

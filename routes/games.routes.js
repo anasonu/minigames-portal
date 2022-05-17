@@ -110,4 +110,30 @@ router.post("/:id/delete", isLoggedin, async (req, res, next) => {
 })
 
 
+// POST "/games/:buscador" => busca el juego con el nombre que escribimos en el cuadro de buscar
+router.post("/:buscador", (req, res, next) => {
+    const { buscador } = req.body;
+
+    //console.log("req.body: ", buscador)
+    GameModel.find().populate("creador")
+    .then((allGames) => {
+        let juegoBuscado = [];
+        //console.log("busquedaJuegos: ", allGames);
+        for (let i=0;i<allGames.length; i++) {
+            if (allGames[i].titulo === buscador) {
+                juegoBuscado.push(allGames[i])
+            }
+        }
+        res.render("games/listSearch.hbs", {
+            gameSearch: juegoBuscado
+        })
+
+    })
+    .catch((err) => {
+        next(err);
+    })
+
+})
+
+
 module.exports = router;
