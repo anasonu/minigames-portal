@@ -20,6 +20,10 @@ const userSchema = new Schema(
     admin: {
       type: Boolean,
       default: false,
+    },
+    favoritos: {
+      type: [Schema.Types.ObjectId],
+      ref: "game"
     }
   },
   {
