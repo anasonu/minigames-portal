@@ -15,16 +15,17 @@
 
       <nav>
          <a href="/">Inicio</a>
-         <a href="/login">Log in</a>
-         <a href="/signup">Sign up</a>
-         <a href="/profile">Perfil</a>
 
-         <br />
-
-         <a href="/games/create">Añade tu juego</a>
+         {{#if userIsActive}}
+            <a href="/profile">Perfil</a>
+            <a href="/games/create">Añade tu juego</a>
+         {{else}}
+            <a href="/login">Log in</a>
+            <a href="/signup">Sign up</a>
+         {{/if}}
 
          {{#if userIsAdmin}}
-            | <a href="/user/list">Lista de usuarios</a> |
+            <a href="/user/list">Lista de usuarios</a>
             <a href="/user/create">Crear usuarios</a>
          {{/if}}
 
