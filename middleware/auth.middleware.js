@@ -6,11 +6,11 @@ module.exports = {
             next();
         }
     },
-    // isCreator: (req, res, next) => {
-    //     if(req.session.user._id === creador) {
-    //         next();
-    //     } else {
-    //         return;
-    //     }
-    // }
+    isAdmin: (req, res, next) => {
+        if(!req.session.user.admin) {
+            res.redirect("/login")
+        } else {
+            next();
+        }
+    }
 }

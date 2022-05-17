@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const UserModel = require("../models/User.model.js");
+const { isAdmin } = require("../middleware/auth.middleware.js");
 
 // GET "/user/create" => Renderizar formulario de creación de un nuevo usuario
 router.get("/create", (req, res, next) => {
