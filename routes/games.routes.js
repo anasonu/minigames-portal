@@ -35,18 +35,17 @@ router.post("/create", async (req,res,next) => {
 router.get("/:id/details", (req,res,next) => {
     const { id } = req.params;
     
-    req.app.locals.esCreador = false;
+    // req.app.locals.esCreador = false;
 
     GameModel.findById(id).populate("creador")
     .then((game) => {
-        //console.log("prueba", game.creador.username);
-        //console.log("3:", game.creador._id.toString())
-        //const idCreador = game.creador._id.toString()
-        //console.log("3:", idCreador)
-        if (req.session.user.username === game.creador.username) {
+
+        if(!req.app.locals.userIsActive) {
+            req.app.locals.esCreador = false;
+        } else if (req.session.user.username === game.creador.username) {
             req.app.locals.esCreador = true;
-            //console.log("4:", req.app.locals.esCreador)
-        }
+        } 
+
         res.render("games/details.hbs", {
             gameDetails: game
         })
