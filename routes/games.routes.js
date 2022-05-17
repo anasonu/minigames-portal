@@ -36,12 +36,6 @@ router.get("/:id/details", (req,res,next) => {
     const { id } = req.params;
     
     req.app.locals.esCreador = false;
-    console.log("1:", req.app.locals.esCreador)
-    console.log("2:", req.session.user._id)
-
-    req.app.locals.esCreador = false;
-    //console.log("1:", req.app.locals.esCreador)
-    //console.log("2:", req.session.user.username)
 
     GameModel.findById(id).populate("creador")
     .then((game) => {
