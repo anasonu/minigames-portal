@@ -44,6 +44,15 @@ router.post("/", async (req, res, next) => {
 
         req.session.user = registeredUser;
         req.app.locals.userIsActive = true;
+
+        req.app.locals.userIsAdmin = false;
+
+        const {admin} = req.session.user;
+        if(admin === true) {
+            req.app.locals.userIsAdmin = true;
+        }
+
+        // console.log("================>", req.session.user.admin, "<=================")
         
         res.redirect("/profile")
 
