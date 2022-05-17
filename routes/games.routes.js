@@ -1,5 +1,6 @@
 const router = require("express").Router();
 
+const uploader = require("../middleware/uploader.js");
 const GameModel = require("../models/Game.model.js");
 const { isLoggedin } = require("../middleware/auth.middleware.js");
 
@@ -12,12 +13,15 @@ router.get("/create", isLoggedin, (req, res, next) => {
 })
 
 // POST "/games/create" => añade un objeto a la coleccion de juegos de la bd, y redirecciona al listado
-router.post("/create", async (req,res,next) => {
-    const { titulo, creador, descripcion, url } = req.body;
+router.post("/create", uploader.single("imagen"), async (req,res,next) => {
+    const { imagen, titulo, creador, descripcion, url } = req.body;
     const {_id} = req.session.user;
-    // console.log(req.session.user.username)
+    
+    console.log("El archivo recibido de Cloudinary:", req.file);
+
     try {
         const game = await GameModel.create( {
+            imagen: req.file.path,
             titulo,
             creador: _id,
             descripcion,
@@ -78,6 +82,8 @@ router.post("/:id/edit", (req, res, next) => {
 
     const { titulo, creador, descripcion, url } = req.body;
 
+    console.log("El archivo recibido de Cloudinary:", req.file);
+
     GameModel.findByIdAndUpdate(id, {
         titulo, 
         creador, 
@@ -92,6 +98,31 @@ router.post("/:id/edit", (req, res, next) => {
     })
 })
 
+// POST "games/edit-image" => Enviar formulario de cambio de imagen
+router.post("/:id/edit-image", uploader.single("imagen"), async (req, res, next) => {
+    const {id} = req.params;
+
+    if(!req.file) {
+        const gameEdit = await GameModel.findById(id)
+        
+        res.render("games/edit.hbs", {
+            gameEdit,
+            errorMessage: "El campo de imagen está vacío",
+        })
+        return;
+    }
+
+    GameModel.findByIdAndUpdate(id, {
+        imagen: req.file.path
+    })
+
+    .then((response) => {
+        res.redirect(`/games/${id}/details`);
+    })
+    .catch((err) => {
+        next(err);
+    })
+})
 
 // POST "/games/:id/delete" => borra el juego seleccionado
 router.post("/:id/delete", isLoggedin, async (req, res, next) => {

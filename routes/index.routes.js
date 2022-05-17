@@ -35,5 +35,8 @@ router.use("/login", loginRoutes);
 const userRoutes = require("./user.routes.js");
 router.use("/user", userRoutes);
 
+// ----- RUTA DE SUBIDA DE IMAGEN DE PORTADA DE JUEGO -----
+const imageRoutes = require("./image.routes.js");
+router.use("/upload", imageRoutes);
 
 module.exports = router;
