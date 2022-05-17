@@ -51,14 +51,24 @@ router.post("/", async (req, res, next) => {
         if(admin === true) {
             req.app.locals.userIsAdmin = true;
         }
-
-        // console.log("================>", req.session.user.admin, "<=================")
         
         res.redirect("/profile")
 
     } catch (err) {
         next(err);
     }
+
+
+    // ----- RUTA DE LOGOUT -----
+
+    // POST "/login/logout" => Cierre de sesión
+    router.post("/logout", (req, res, next) => {
+        req.session.destroy();
+        req.app.locals.userIsActive = false;
+        req.app.locals.userIsAdmin = false;
+
+        res.redirect("/");
+    })
 
 })
 

@@ -19,6 +19,12 @@
          {{#if userIsActive}}
             <a href="/profile">Perfil</a>
             <a href="/games/create">Añade tu juego</a>
+            <br>
+            <br>
+            <form action="/login/logout" method="post">
+               <button>Cerrar sesión</button>
+            </form>
+            <br>
          {{else}}
             <a href="/login">Log in</a>
             <a href="/signup">Sign up</a>

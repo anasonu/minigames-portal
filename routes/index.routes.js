@@ -35,4 +35,5 @@ router.use("/login", loginRoutes);
 const userRoutes = require("./user.routes.js");
 router.use("/user", userRoutes);
 
+
 module.exports = router;
