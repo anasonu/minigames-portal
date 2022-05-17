@@ -2,8 +2,9 @@ const router = require("express").Router();
 const { isLoggedin } = require("../middleware/auth.middleware.js");
 
 const UserModel = require("../models/User.model.js");
-
+const GameModel = require("../models/Game.model.js");
 const bcryptjs = require("bcryptjs");
+
 
 router.get("/", isLoggedin, (req, res, next) => {
     const userID = req.session.user._id;
@@ -11,9 +12,23 @@ router.get("/", isLoggedin, (req, res, next) => {
     UserModel.findById(userID)
     .then((user) => {
         //console.log("info user: ", user)
-        res.render("profile/profile.hbs", {
-            userInfo: user
+        GameModel.find().populate("creador")
+        .then((allGames) => {
+            //console.log(allGames)
+            let juegosPropios = [];
+            for (let i=0; i< allGames.length; i++) {
+                if (allGames[i].creador.username === user.username) {
+                    juegosPropios.push(allGames[i]);
+                }
+            }
+            res.render("profile/profile.hbs", {
+                userInfo: user,
+                gamesInfo: juegosPropios
+            })
+
         })
+        
+
     })
     .catch((err) => {
         next(err);
