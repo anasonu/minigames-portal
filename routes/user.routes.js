@@ -94,6 +94,20 @@ router.post("/:id/edit", (req, res, next) => {
 })
 
 
+// ----- CRUD: DELETE -----
+
+// POST "/user/:id/delete" => Enviar formulario de eliminación de usuario y eliminar usuario
+router.post("/:id/delete", (req, res, next) => {
+    const {id} = req.params;
+
+    UserModel.findByIdAndDelete(id)
+    .then((response) => {
+        res.redirect("/user/list");
+    })
+    .catch((err) => {
+        next(err);
+    })
+})
 
 
 module.exports = router;
