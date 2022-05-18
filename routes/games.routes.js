@@ -3,6 +3,7 @@ const router = require("express").Router();
 const uploader = require("../middleware/uploader.js");
 const GameModel = require("../models/Game.model.js");
 const { isLoggedin } = require("../middleware/auth.middleware.js");
+const UserModel = require("../models/User.model.js");
 
 
 // GET "/games/create" => renderiza formulario de añadir un juego
@@ -139,6 +140,32 @@ router.post("/:id/delete", isLoggedin, async (req, res, next) => {
     
 })
 
+// POST "/games/favourites" => marca el juego como favorito y lo inserta en el array de favoritos
+router.post("/favourites/:id", isLoggedin, (req, res, next) => {
+    const { id } = req.params;
+    const {_id} = req.session.user;
+
+    GameModel.findById(id)
+    .then((game) => {
+        //console.log(game._id.toString());
+        UserModel.findByIdAndUpdate(_id, 
+            //favoritos: favoritos.push(game._id)
+            {$push: {"favoritos": game._id}}
+        )
+        .then((usuario) => {
+            //usuario.favoritos.push(game._id.toString());
+            res.render("games/details.hbs")
+        })
+        .catch((err) => {
+            next(err)
+        })
+    
+    })
+    .catch((err) => {
+        next(err)
+    })
+
+})
 
 // POST "/games/:buscador" => busca el juego con el nombre que escribimos en el cuadro de buscar
 router.post("/:buscador", (req, res, next) => {
@@ -164,6 +191,9 @@ router.post("/:buscador", (req, res, next) => {
     })
 
 })
+
+
+
 
 
 module.exports = router;

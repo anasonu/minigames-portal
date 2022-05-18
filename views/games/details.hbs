@@ -6,6 +6,12 @@
 {{gameDetails.descripcion}} <br />
 {{gameDetails.url}} <br />
 
+
+<form action="/games/favourites/{{gameDetails._id}}" method="POST">
+    <button> Añadir favorito </button>
+</form>
+
+
 {{#if esCreador}}
     <a href="/games/{{gameDetails._id}}/edit">
         <button> Editar </button>
