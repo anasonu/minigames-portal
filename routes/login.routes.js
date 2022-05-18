@@ -57,19 +57,18 @@ router.post("/", async (req, res, next) => {
     } catch (err) {
         next(err);
     }
+    
+})
 
+// ----- RUTA DE LOGOUT -----
 
-    // ----- RUTA DE LOGOUT -----
+// POST "/login/logout" => Cierre de sesión
+router.post("/logout", (req, res, next) => {
+    req.session.destroy();
+    req.app.locals.userIsActive = false;
+    req.app.locals.userIsAdmin = false;
 
-    // POST "/login/logout" => Cierre de sesión
-    router.post("/logout", (req, res, next) => {
-        req.session.destroy();
-        req.app.locals.userIsActive = false;
-        req.app.locals.userIsAdmin = false;
-
-        res.redirect("/");
-    })
-
+    res.redirect("/");
 })
 
 module.exports = router;
