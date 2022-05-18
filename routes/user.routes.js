@@ -28,7 +28,7 @@ router.post("/create", (req, res, next) => {
 // ----- CRUD: READ -----
 
 // GET "/user/list => Renderizar una lista de usuarios registrados
-router.get("/list", (req, res, next) => {
+router.get("/list", isAdmin, (req, res, next) => {
     UserModel.find()
     .then((allUsers) => {
         res.render("users/users-list.hbs", {
@@ -43,7 +43,7 @@ router.get("/list", (req, res, next) => {
 
 
 // GET "/user/:id" => Renderizar la vista de perfil de un usuario identificado por su id
-router.get("/:id", (req, res, next) => {
+router.get("/:id", isAdmin, (req, res, next) => {
     const {id} = req.params;
     
     UserModel.findById(id)
@@ -61,7 +61,7 @@ router.get("/:id", (req, res, next) => {
 // ----- CRUD: UPDATE -----
 
 // GET "/user/:id/edit" => Renderizar formulario de edición de usuario
-router.get("/:id/edit", (req, res, next) => {
+router.get("/:id/edit", isAdmin, (req, res, next) => {
     const {id} = req.params;
     
     UserModel.findById(id)
