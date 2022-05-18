@@ -4,7 +4,7 @@ const GameModel = require("../models/Game.model.js");
 
 /* GET home page */
 router.get("/", (req, res, next) => {
-  GameModel.find()
+  GameModel.find().populate("creador")
   .then((allGames) => {
       res.render("games/list.hbs", {
           listGames: allGames
