@@ -7,9 +7,20 @@
 {{gameDetails.url}} <br />
 
 
-<form action="/games/favourites/{{gameDetails._id}}" method="POST">
-    <button> Añadir favorito </button>
-</form>
+    <form action="/games/favourites/{{gameDetails._id}}" method="POST">
+        <button> 
+            {{#if esFavorito}}
+
+            Borrar favorito 
+
+            {{else}}
+
+            Añadir favorito
+            
+            {{/if}}
+
+        </button>
+    </form>
 
 
 {{#if esCreador}}

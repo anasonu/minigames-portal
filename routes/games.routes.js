@@ -39,21 +39,42 @@ router.post("/create", uploader.single("imagen"), async (req,res,next) => {
 // GET "/games/:id/details" => muestra los detalles del juego seleccionado
 router.get("/:id/details", (req,res,next) => {
     const { id } = req.params;
-    
-    // req.app.locals.esCreador = false;
+    const { _id } = req.session.user;
 
+    // req.app.locals.esCreador = false;
     GameModel.findById(id).populate("creador")
     .then((game) => {
+        //let esFavorito;
 
-        if(!req.app.locals.userIsActive) {
-            req.app.locals.esCreador = false;
-        } else if (req.session.user.username === game.creador.username) {
-            req.app.locals.esCreador = true;
-        } 
+        UserModel.findById(_id)
+        .then((usuario) => {
+            const esFavorito = usuario.favoritos.includes(game._id);
+            // if (usuario.favoritos.includes(game._id)) {
+            //     esFavorito = true;
+            // } else {
+            //     esFavorito = false;
+            // }
 
-        res.render("games/details.hbs", {
-            gameDetails: game
+            const esCreador = req.session.user.username == game.creador.username;
+
+            // if(!req.app.locals.userIsActive) {
+            //     req.app.locals.esCreador = false;
+            // } else if (req.session.user.username == game.creador.username) {
+            //     req.app.locals.esCreador = true;
+            // } 
+            //console.log(esFavorito);
+    
+            res.render("games/details.hbs", {
+                gameDetails: game,
+                esFavorito,
+                esCreador
+            })
+    
         })
+        .catch((err) => {
+            next(err)
+        })
+    
     })
     .catch((err) => {
         next(err);
@@ -140,25 +161,86 @@ router.post("/:id/delete", isLoggedin, async (req, res, next) => {
     
 })
 
+
+//GET "/games/favourites" =>
+// router.get("/favourites/:id", isLoggedin, (req, res, next) => {
+//     const { id } = req.params;
+//     const {_id} = req.session.user;
+    
+//     GameModel.findById(id).populate("creador")
+//     .then((game) => {
+//         //console.log(game._id.toString());
+
+//         UserModel.findById(_id)
+//         .then((infoUsuario) => {
+//             if (!infoUsuario.favoritos.includes(game._id)) {
+//                 req.app.locals.esFavorito = false;
+//             } else {
+//                 req.app.locals.esFavorito = true;
+//             }
+//         }) 
+//         res.render("games/details.hbs", {
+//             gameDetails: game
+//         })
+//     })
+// })
+
+
 // POST "/games/favourites" => marca el juego como favorito y lo inserta en el array de favoritos
 router.post("/favourites/:id", isLoggedin, (req, res, next) => {
     const { id } = req.params;
     const {_id} = req.session.user;
 
-    GameModel.findById(id)
+    //req.app.locals.esFavorito = false
+    //req.app.locals.esFavorito;
+
+    GameModel.findById(id).populate("creador")
     .then((game) => {
         //console.log(game._id.toString());
-        UserModel.findByIdAndUpdate(_id, 
-            //favoritos: favoritos.push(game._id)
-            {$push: {"favoritos": game._id}}
-        )
-        .then((usuario) => {
-            //usuario.favoritos.push(game._id.toString());
-            res.render("games/details.hbs")
+
+        UserModel.findById(_id)
+        .then((infoUsuario) => {
+            //console.log(infoUsuario.favoritos.includes(game._id));
+            if (!infoUsuario.favoritos.includes(game._id)) {
+                // req.app.locals.esFavorito = false
+
+                UserModel.findByIdAndUpdate(_id, 
+                    {$push: {"favoritos": game._id}}
+                )
+                .then((usuario) => {
+                   //res.render("games/details.hbs", {
+                    //    gameDetails: game
+                   // })
+                   res.redirect(`/games/${id}/details`)
+                })
+                .catch((err) => {
+                    next(err)
+                })
+        
+            } else {
+                // req.app.locals.esFavorito = true
+
+                //const posicionJuego = infoUsuario.favoritos.indexOf(game._id)
+                //console.log(posicionJuego);
+
+                UserModel.findByIdAndUpdate(_id, 
+                    {$pull: {favoritos: game._id}}
+                )
+                .then((usuario) => {
+                    // res.render("games/details.hbs", {
+                    //     gameDetails: game
+                    // })
+                    res.redirect(`/games/${id}/details`)
+                })
+                .catch((err) => {
+                    next(err)
+                })
+
+            }
+            
         })
-        .catch((err) => {
-            next(err)
-        })
+
+
     
     })
     .catch((err) => {

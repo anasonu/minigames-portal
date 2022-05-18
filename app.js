@@ -23,6 +23,21 @@ const capitalized = require("./utils/capitalized");
 const projectName = "proyecto-minijuegos";
 
 app.locals.appTitle = `${capitalized(projectName)} created with IronLauncher`;
+// Para refrescar las variables locales en cada request
+app.use((req, res, next) => {
+    if(req.session.user) {
+        res.locals.userIsActive = true;
+
+        const {admin} = req.session.user;
+        if(admin === true) {
+            res.locals.userIsAdmin = true;
+        }
+    } else {
+        res.locals.userIsActive = false;
+        res.locals.userIsAdmin = false;
+    }
+    next();
+})
 
 // 👇 Start handling routes here
 const index = require("./routes/index.routes");
