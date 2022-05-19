@@ -39,4 +39,8 @@ router.use("/user", userRoutes);
 const imageRoutes = require("./image.routes.js");
 router.use("/upload", imageRoutes);
 
+// ----- RUTA DE SECCIÓN COMENTARIOS -----
+// const commentRoutes = require("./comments.routes.js");
+// router.use("/games")
+
 module.exports = router;

@@ -22,9 +22,43 @@
         </button>
     </form>
 
-
+<br>
 {{#if esCreador}}
     <a href="/games/{{gameDetails._id}}/edit">
         <button> Editar </button>
     </a>
 {{/if}}
+
+<br>
+<br>
+
+{{#each commentList}}
+    <p>{{this.username.username}}</p>
+    <p>{{this.message}}</p>
+    <br>
+
+    {{esPropietario}}
+
+    {{!-- {{#if esPropietario}} --}}
+        <form action="/games/{{this.gameId}}/details/comment/{{this._id}}" method="post">
+            <button>Eliminar</button>
+        </form>
+    {{!-- {{/if}} --}}
+{{/each}}
+
+<br>
+<br>
+
+<form action="/games/{{gameDetails._id}}/details/comment" method="post">
+    <label for="username">Usuario: </label>
+    <input type="text" name="username" value="{{userComment}}" disabled>
+    <br>
+    <br>
+    <label for="message">Comentario: </label>
+    <br>
+    <textarea name="message" rows="4" cols="50">
+    </textarea>
+    <br>
+    <br>
+    <button>Añadir comentario</button>
+</form>

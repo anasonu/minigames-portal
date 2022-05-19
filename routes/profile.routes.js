@@ -3,6 +3,7 @@ const { isLoggedin } = require("../middleware/auth.middleware.js");
 
 const UserModel = require("../models/User.model.js");
 const GameModel = require("../models/Game.model.js");
+const CommentModel = require("../models/comments.model.js");
 const bcryptjs = require("bcryptjs");
 
 
