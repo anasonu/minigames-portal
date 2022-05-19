@@ -8,7 +8,7 @@
     <button class="btn btn-primary mb-3"> Guardar imagen </button>   
 </form>
 
-<p class="fw-semibold"> {{errorMessage}} </p>
+<p style="color:red">{{errorMessage}} </p>
 
 <form action="/games/{{gameEdit._id}}/edit" method="POST">
 <div class="mb-3">
@@ -32,7 +32,7 @@
     <button class="btn btn-danger mb-3"> Borrar </button>
 </form>
 
-{{errorMessage2}}
+    <p style="color:red">{{errorMessage2}} </p>
 
 {{!-- <img src="{{gameDetails.imagen}}" alt="img" width="200px"> <br /> --}}
 
