@@ -1,8 +1,15 @@
-<h1> Buscador de juegos </h1>
+<h1 style="margin-top: 15px; margin-bottom: 25px;"> Buscador de juegos </h1>
+
 {{#each gameSearch}}
-    <img src="{{this.imagen}}" alt="img" width="200px"> <br />
-    {{this.titulo}} <br />
-    {{this.creador.username}} <br />
-    {{this.descripcion}} <br />
-    {{this.url}} <br />
+        {{!-- <h5 class="card-title">{{this.titulo}}</h5>
+        <h6 class="card-subtitle mb-2 text-muted"> {{this.creador.username}}</h6>
+        <p class="card-text"> {{this.descripcion}} </p> --}}
+
+<div class="card p-3" style="width: 300px;">
+    <img class="img-fluid" src="{{this.imagen}}" alt="img" > <br />
+    <h5 class="card-title">{{this.titulo}}</h5>
+    <h6 class="card-subtitle mb-2 text-muted">{{this.creador.username}} </h6>
+    <p class="card-text">{{this.descripcion}} </p>
+        <a href="{{this.url}}" class="btn btn-primary" > Jugar </a>
+</div>
 {{/each}}

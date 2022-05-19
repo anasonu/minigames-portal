@@ -15,33 +15,54 @@
 
    <body>
 
-      <nav class="navbar navbar-expand-lg bg-light">
+      <nav class="navbar navbar-expand-lg d-flex justify-content-between" style="margin-right: 50px;">
          <a class="navbar-brand" href="/">Inicio</a>
 
-         {{#if userIsActive}}
-            <a class="navbar-brand" href="/profile">Perfil</a>
+
+         {{#if userIsAdmin}}
+            <a class="navbar-brand" href="/user/list">Lista de usuarios</a>
+            <a class="navbar-brand" href="/user/create">Crear usuarios</a>
+         {{/if}}
+      <form class="d-flex" role="search" action="/games/listSearch" method="POST">
+         <input style="width: 400px;" class="form-control me-2" type="text" name="buscador" placeholder="Busca el juego que quieras">
+         <button class="btn btn-outline-success"> Buscar </button>
+      </form>
+
+               {{#if userIsActive}}
+               <li class="nav-item dropdown" style="list-style-type:none;">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                     Mi cuenta
+                  </a>
+                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                     <li><a class="dropdown-item" href="/profile">Perfil</a></li>
+                     <li><a class="dropdown-item" href="/games/create">Añadir un juego</a></li>
+                     <li><hr class="dropdown-divider"></li>
+
+                     <li>
+                        <form action="/login/logout" method="post">
+                           <button class="dropdown-item">Cerrar sesión</button>
+                        </form>
+                     </li>
+                  </ul>
+               </li>
+
+            {{!-- <a class="navbar-brand" href="/profile">Perfil</a>
             <a class="navbar-brand" href="/games/create">Añade tu juego</a>
             <br>
             <br>
             <form action="/login/logout" method="post">
                <button>Cerrar sesión</button>
             </form>
-            <br>
+            <br> --}}
          {{else}}
-            <a class="navbar-brand" href="/login">Log in</a>
-            <a class="navbar-brand" href="/signup">Sign up</a>
+            <div>
+               <a class="navbar-brand" href="/login">Log in</a>
+               <a class="navbar-brand" href="/signup">Sign up</a>
+
+            </div>
          {{/if}}
 
-         {{#if userIsAdmin}}
-            <a class="navbar-brand" href="/user/list">Lista de usuarios</a>
-            <a class="navbar-brand" href="/user/create">Crear usuarios</a>
-         {{/if}}
-      <br>
-      <br>
-      <form class="d-flex" role="search" action="/games/listSearch" method="POST">
-         <input class="form-control me-2" type="text" name="buscador" placeholder="Busca el juego que quieras">
-         <button class="btn btn-outline-success"> Buscar </button>
-      </form>
+
       </nav>
 
       {{{body}}}

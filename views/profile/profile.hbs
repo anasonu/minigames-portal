@@ -7,27 +7,25 @@
 
     
 <h1 style="margin-top: 15px; margin-bottom: 25px;"> Tus juegos </h1>
-<div class="d-flex justify-content-center flex-wrap gap-3">
+<div class="d-flex flex-wrap gap-3">
 {{#each gamesInfo}}
     <div class="card p-2" style="width: 300px;">
         <img class="mx-auto" src="{{this.imagen}}" alt="img" width="200px" />
         <h4 style="margin-top: 5px; margin-bottom: 5px;"> {{this.titulo}}</h4>
         <p> {{this.descripcion}}</p>
-        <a class="btn btn-primary mx-auto" href="{{this.url}}"> Jugar </a>
+        <a class="btn btn-primary" href="{{this.url}}"> Jugar </a>
     </div>
 {{/each}}
 </div>
 
 <h1 style="margin-top: 15px; margin-bottom: 25px;"> Tus favoritos </h1>
-<div class="d-flex justify-content-center flex-wrap gap-3">
+<div class="d-flex flex-wrap gap-3">
 {{#each favInfo}}
     <div class="card p-2" style="width: 300px;">
         <img class="mx-auto" src="{{this.imagen}}" alt="img" width="200px" />
         <h4 style="margin-top: 5px; margin-bottom: 5px;"> {{this.titulo}}</h4>
         <p> {{this.descripcion}}</p>
-        <div class="mx-auto">
-        <a href="{{this.url}}"> <button class="btn btn-primary mx-auto"> Jugar </button></a>
-        </div>
+        <a href="{{this.url}}" class="btn btn-primary">Jugar </a>
     </div>
 {{/each}}
 </div>

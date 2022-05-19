@@ -1,23 +1,27 @@
-<h1> Tu perfil </h1>
+<h1 style="margin-top: 15px; margin-bottom: 25px;"> Tu perfil </h1>
 
 
 <form action="/profile/{{userEdit._id}}/edit" method="POST">
-    <label for="username"> Username: </label>
-    <input type="text" name="username" value="{{userEdit.username}}" />
-    <br />
-    <label for="email"> Email: </label>
-    <input type="text" name="email" value="{{userEdit.email}}" />
-    <br />
-    <label for="password"> Contraseña: </label>
-    <input type="password" name="password" />
-    <br />
-    <label for="password2"> Repite la contraseña: </label>
-    <input type="password" name="password2" />
-
+<div class="mb-3">
+    <label class="form-label" for="username"> Username: </label>
+    <input class="form-control" type="text" name="username" value="{{userEdit.username}}" />
+</div>
+<div class="mb-3">
+    <label class="form-label" for="email"> Email: </label>
+    <input class="form-control" type="text" name="email" value="{{userEdit.email}}" />
+</div>
+<div class="mb-3">
+    <label class="form-label" for="password"> Contraseña: </label>
+    <input class="form-control" type="password" name="password" />
+</div>
+<div class="mb-3">
+    <label class="form-label" for="password2"> Repite la contraseña: </label>
+    <input class="form-control" type="password" name="password2" />
+</div>
 
     <p> {{errorMessage}} </p>
 
-    <button> Guardar cambios </button>
+    <button class="btn btn-success mb-3"> Guardar cambios </button>
     
 </form>
 
