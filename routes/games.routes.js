@@ -43,7 +43,7 @@ router.post("/:id/details/comment/:idcomment", (req, res, next) => {
     .then((game) => {
         CommentModel.findById(idcomment).populate("username")
         .then((comment) => {
-            const esPropietario = req.session.user.username == comment.username.username;
+            // const esPropietario = req.session.user.username == comment.username.username;
             // console.log("===========================", esPropietario)
             // console.log("===========================", req.session.user.username)
             // console.log("===========================", comment.username.username)
@@ -76,16 +76,23 @@ router.get("/:id/details", (req, res, next) => {
         .then((usuario) => {
           const esFavorito = usuario.favoritos.includes(game._id);
           const esCreador = req.session.user.username == game.creador.username;
+          let esPropietario;
 
-          CommentModel.find({ gameId: game._id })
-            .populate("username")
-            .then((commentList) => {
+          CommentModel.find({ gameId: game._id }).populate("username")
+            .then((commentListFromDB) => {
+
+                let commentList = JSON.parse(JSON.stringify(commentListFromDB));
+
+                commentList.forEach((comment) =>{
+                    comment.esPropietario = req.session.user.username == comment.username.username || req.session.user.admin;
+                })
               res.render("games/details.hbs", {
                 gameDetails: game,
                 esFavorito,
                 esCreador,
                 userComment: usuario.username,
                 commentList,
+                esPropietario,
               });
             })
             .catch((err) => {

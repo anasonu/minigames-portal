@@ -14,9 +14,6 @@ const commentSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "game",
     },
-    // date: {
-    //     type: Date,
-    // }
 })
 
 const CommentModel = model("comment", commentSchema);

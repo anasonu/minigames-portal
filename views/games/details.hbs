@@ -32,18 +32,19 @@
 <br>
 <br>
 
+{{!-- <b>Prueba fuera: </b> {{esPropietario}} --}}
+
 {{#each commentList}}
     <p>{{this.username.username}}</p>
     <p>{{this.message}}</p>
-    <br>
 
-    {{esPropietario}}
-
-    {{!-- {{#if esPropietario}} --}}
+    {{#if this.esPropietario}}
         <form action="/games/{{this.gameId}}/details/comment/{{this._id}}" method="post">
             <button>Eliminar</button>
         </form>
-    {{!-- {{/if}} --}}
+        <br>
+        <br>
+    {{/if}}
 {{/each}}
 
 <br>
