@@ -1,20 +1,26 @@
-<h1> Añade tu juego </h1>
+<h1 style="margin-top: 15px; margin-bottom: 25px;"> Añade tu juego </h1>
+
 
 <form action="/games/create" method="POST" enctype="multipart/form-data"> 
-    <label for="imagen"> Imagen de portada: </label>
-    <input type="file" name="imagen" />
-    <br>
-    <label for="titulo"> Titulo: </label>
-    <input type="text" name="titulo" />
-    <br />
-    <label for="descripcion"> Descripción: </label>
-    <input type="text" name="descripcion" />
-    <br />
-    <label for="url"> URL: </label>
-    <input type="text" name="url" />
-    <br />
+<div class="mb-3">
 
-    <button> Añadir </button>
+    <label class="form-label" for="imagen"> Imagen de portada: </label>
+    <input class="form-control" type="file" name="imagen" />
+</div>
+<div class="mb-3">
+    <label class="form-label" for="titulo"> Titulo: </label>
+    <input class="form-control" type="text" name="titulo" />
+</div>
+<div class="mb-3">
+
+    <label class="form-label" for="descripcion"> Descripción: </label>
+    <input class="form-control" type="text" name="descripcion" />
+</div>
+<div class="mb-3">
+    <label class="form-label" for="url"> URL: </label>
+    <input class="form-control" type="text" name="url" />
+</div>
+    <button class="btn btn-primary mb-3"> Añadir </button>
     
 </form>
 
