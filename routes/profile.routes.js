@@ -60,9 +60,23 @@ router.post("/:id/edit", isLoggedin, async (req, res, next) => {
     const { id } = req.params;
     const { username, email, password, password2 } = req.body;
 
+    if(!username || !email) {
+        UserModel.findById(id)
+        .then((user) => {
+            res.render("profile/edit-profile.hbs", {
+                errorMessage: "El usuario y el email deben estar rellenos",
+                userEdit: user
+            })
+        })
+        .catch((err) => {
+            next(err)
+        })
+        return;
+    }
+
     if (password !== password2) {
         res.render("profile/edit-profile.hbs", {
-            errorMessage: "Las contraseñas no coinciden"
+            errorMessage: "¡Ups! Parece que hay campos sin rellenar",
         })
         return;
     }

@@ -18,7 +18,12 @@ router.post("/create", uploader.single("imagen"), async (req, res, next) => {
   const { imagen, titulo, creador, descripcion, url } = req.body;
   const { _id } = req.session.user;
 
-  console.log("El archivo recibido de Cloudinary:", req.file);
+  if(!imagen || !titulo || ! descripcion || !url) {
+    res.render("games/add.hbs", {
+        errorMessage: "¡Ups! Parece que hay campos sin rellenar"
+    })
+    return;
+}
 
   try {
     const game = await GameModel.create({
@@ -173,7 +178,19 @@ router.post("/:id/edit", (req, res, next) => {
 
   const { titulo, creador, descripcion, url } = req.body;
 
-  console.log("El archivo recibido de Cloudinary:", req.file);
+  if(!titulo || !descripcion || !url) {
+    GameModel.findById(id)
+    .then((game) => {
+      res.render(`games/edit.hbs`, {
+        errorMessage2: "Los campos del título, la descripción o la URL no pueden estar vacíos.",
+        gameEdit: game,
+      });
+    })
+    .catch((err) => {
+      next(err);
+    });
+    return;
+}
 
   GameModel.findByIdAndUpdate(id, {
     titulo,
