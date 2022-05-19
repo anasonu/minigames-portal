@@ -1,26 +1,36 @@
 <h1> Detalles del juego </h1>
 
-<img src="{{gameDetails.imagen}}" alt="img" width="200px"> <br />
-{{gameDetails.titulo}} <br />
-{{gameDetails.creador.username}} <br />
-{{gameDetails.descripcion}} <br />
-{{gameDetails.url}} <br />
-
+<div class="card" style="border: none;">
+<img class="img-fluid" src="{{gameDetails.imagen}}" alt="img" > <br />
+<div class="d-flex justify-content-between" >
+<p class="fs-1 text"> {{gameDetails.titulo}}</p>
+    <div class="d-flex gap-3">
+        <a href="{{gameDetails.url}}" class="fs-5 text"> <button type="button" class="btn btn-primary"> ¡Pruébalo tú mismo! </button></a>
 
     <form action="/games/favourites/{{gameDetails._id}}" method="POST">
-        <button> 
+        <button style="border: none; background: none; "> 
             {{#if esFavorito}}
 
-            Borrar favorito 
+            <img src="https://res.cloudinary.com/dmrjy3ynh/image/upload/v1652973228/games-portal/fav_ongx4k.png" alt="fav"> 
 
             {{else}}
 
-            Añadir favorito
+            <img src="https://res.cloudinary.com/dmrjy3ynh/image/upload/v1652973228/games-portal/nofav_zfuoql.png" alt="nofav"> 
             
             {{/if}}
 
         </button>
     </form>
+
+
+    </div>
+
+</div>
+
+<p class="fs-3 text"> {{gameDetails.creador.username}} </p>
+<p class="fs-5 text"> {{gameDetails.descripcion}}</p>
+</div>
+
 
 <br>
 {{#if esCreador}}
@@ -35,31 +45,36 @@
 {{!-- <b>Prueba fuera: </b> {{esPropietario}} --}}
 
 {{#each commentList}}
-    <p>{{this.username.username}}</p>
-    <p>{{this.message}}</p>
+    <p class="text-multed">{{this.username.username}}, dice: </p>
+    <p class="fw-normal">{{this.message}}</p>
 
     {{#if this.esPropietario}}
         <form action="/games/{{this.gameId}}/details/comment/{{this._id}}" method="post">
-            <button>Eliminar</button>
+            <button class="btn btn-danger mb-3">Eliminar</button>
         </form>
+<<<<<<< HEAD
         <br>
     {{/if}}
     <br>
+=======
+    {{/if}}
+    <hr>
+>>>>>>> 7a1bdc0281242d201870a55b92b1107beeb393ee
 {{/each}}
 
 <br>
 <br>
 
 <form action="/games/{{gameDetails._id}}/details/comment" method="post">
-    <label for="username">Usuario: </label>
-    <input type="text" name="username" value="{{userComment}}" disabled>
-    <br>
-    <br>
-    <label for="message">Comentario: </label>
-    <br>
-    <textarea name="message" rows="4" cols="50">
+<div class="mb-3">
+    <label for="username" class="form-label">Usuario: </label>
+    <input class="form-control" type="text" name="username" value="{{userComment}}" disabled>
+</div>
+<div class="mb-3">
+    <label for="message" class="form-label">Comentario: </label>
+    <textarea class="form-control" name="message" rows="4" cols="50">
     </textarea>
-    <br>
-    <br>
-    <button>Añadir comentario</button>
-</form>
+</div>
+
+    <button class="btn btn-success mb-3">Añadir comentario</button>
+</form> 
