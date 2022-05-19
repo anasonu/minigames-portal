@@ -10,6 +10,12 @@ router.get("/create", (req, res, next) => {
 // POST "/user/create" => Enviar la información del formulario y crear el usuario nuevo
 router.post("/create", (req, res, next) => {
     const {username, email, password, admin} = req.body;
+    if(!username || !email || !password) {
+        res.render("users/create-user.hbs", {
+            errorMessage: "¡Ups! Parece que hay campos sin rellenar"
+        })
+        return;
+    }
     UserModel.create({
         username,
         email,
@@ -78,8 +84,21 @@ router.get("/:id/edit", isAdmin, (req, res, next) => {
 // POST "/user/:id/edit" => Enviar formulario y guardar los cambios
 router.post("/:id/edit", (req, res, next) => {
     const {id} = req.params;
-    console.log(req.body)
     const {username, email, admin} = req.body;
+
+    if(!username || !email) {
+        UserModel.findById(id)
+        .then((user) => {
+            res.render("users/edit-user-detail.hbs", {
+                errorMessage: "El usuario y el email deben estar rellenos",
+                userEdit: user,
+            })
+        })
+        .catch((err) => {
+            next(err);
+        })
+        return;
+    }
     
     UserModel.findByIdAndUpdate(id, {
         username,
