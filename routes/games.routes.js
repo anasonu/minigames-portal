@@ -64,15 +64,35 @@ router.post("/:id/details/comment/:idcomment", (req, res, next) => {
 // GET "/games/:id/details" => muestra los detalles del juego seleccionado
 router.get("/:id/details", (req, res, next) => {
   const { id } = req.params;
-  const { _id } = req.session.user;
+//   const { _id } = req.session.user;
+req.app.locals.usuarioLoggeado = true;
 
   // req.app.locals.esCreador = false;
   GameModel.findById(id)
     .populate("creador")
     .then((game) => {
-      //let esFavorito;
 
-      UserModel.findById(_id)
+        if(req.session.user === undefined){
+            req.app.locals.usuarioLoggeado = false;
+            CommentModel.find({ gameId: game._id }).populate("username")
+            .then((commentListFromDB) => {
+                res.render("games/details.hbs", {
+                    gameDetails: game,
+                    esFavorito: false,
+                    esCreador: false,
+                    userComment: "",
+                    commentList: commentListFromDB,
+                    esPropietario: false,
+                  });
+
+            })
+            return;
+
+        }
+
+        
+
+      UserModel.findById(req.session.user._id)
         .then((usuario) => {
           const esFavorito = usuario.favoritos.includes(game._id);
           const esCreador = req.session.user.username == game.creador.username;
@@ -102,6 +122,7 @@ router.get("/:id/details", (req, res, next) => {
         .catch((err) => {
           next(err);
         });
+
     })
     .catch((err) => {
       next(err);

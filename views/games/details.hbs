@@ -52,29 +52,26 @@
         <form action="/games/{{this.gameId}}/details/comment/{{this._id}}" method="post">
             <button class="btn btn-danger mb-3">Eliminar</button>
         </form>
-<<<<<<< HEAD
-        <br>
-    {{/if}}
-    <br>
-=======
     {{/if}}
     <hr>
->>>>>>> 7a1bdc0281242d201870a55b92b1107beeb393ee
 {{/each}}
 
 <br>
 <br>
 
-<form action="/games/{{gameDetails._id}}/details/comment" method="post">
-<div class="mb-3">
-    <label for="username" class="form-label">Usuario: </label>
-    <input class="form-control" type="text" name="username" value="{{userComment}}" disabled>
-</div>
-<div class="mb-3">
-    <label for="message" class="form-label">Comentario: </label>
-    <textarea class="form-control" name="message" rows="4" cols="50">
-    </textarea>
-</div>
 
-    <button class="btn btn-success mb-3">Añadir comentario</button>
-</form> 
+{{#if usuarioLoggeado}}
+    <form action="/games/{{gameDetails._id}}/details/comment" method="post">
+    <div class="mb-3">
+        <label for="username" class="form-label">Usuario: </label>
+        <input class="form-control" type="text" name="username" value="{{userComment}}" disabled>
+    </div>
+    <div class="mb-3">
+        <label for="message" class="form-label">Comentario: </label>
+        <textarea class="form-control" name="message" rows="4" cols="50">
+        </textarea>
+    </div>
+
+        <button class="btn btn-success mb-3">Añadir comentario</button>
+    </form> 
+{{/if}}
