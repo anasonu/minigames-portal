@@ -1,4 +1,4 @@
-<h1> Detalles del juego </h1>
+<h1 style="margin-top: 15px; margin-bottom: 25px;"> Detalles del juego </h1>
 
 <div class="card" style="border: none;">
 <img class="img-fluid" src="{{gameDetails.imagen}}" alt="img" > <br />
@@ -35,7 +35,7 @@
 <br>
 {{#if esCreador}}
     <a href="/games/{{gameDetails._id}}/edit">
-        <button> Editar </button>
+        <button class="btn btn-warning"> Editar detalles </button>
     </a>
 {{/if}}
 

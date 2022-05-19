@@ -1,24 +1,33 @@
-<h1> Tu perfil </h1>
-<h3> {{userInfo.username}} </h3>
-<h3> {{userInfo.email}} </h3>
-
-<a href="/profile/{{userInfo._id}}/edit">
-    <button> Editar </button>
-</a>
+<h1 style="margin-top: 15px; margin-bottom: 25px;"> Tu perfil </h1>
+        <h5> {{userInfo.username}} </h5>
+        <h5> {{userInfo.email}} </h5>
+    <a href="/profile/{{userInfo._id}}/edit">
+        <button class="btn btn-primary"> Editar mis datos</button>
+    </a>
 
     
-<h1> Tus juegos </h1>
+<h1 style="margin-top: 15px; margin-bottom: 25px;"> Tus juegos </h1>
+<div class="d-flex justify-content-center flex-wrap gap-3">
 {{#each gamesInfo}}
-    <img src="{{this.imagen}}" alt="img" width="200px" />
-    <h3> Titulo: {{this.titulo}}</h3>
-    <p> Descripción:{{this.descripcion}}</p>
-    <p> URL:{{this.url}}</p>
+    <div class="card p-2" style="width: 300px;">
+        <img class="mx-auto" src="{{this.imagen}}" alt="img" width="200px" />
+        <h4 style="margin-top: 5px; margin-bottom: 5px;"> {{this.titulo}}</h4>
+        <p> {{this.descripcion}}</p>
+        <a class="btn btn-primary mx-auto" href="{{this.url}}"> Jugar </a>
+    </div>
 {{/each}}
+</div>
 
-<h1> Tus favoritos </h1>
+<h1 style="margin-top: 15px; margin-bottom: 25px;"> Tus favoritos </h1>
+<div class="d-flex justify-content-center flex-wrap gap-3">
 {{#each favInfo}}
-    <img src="{{this.imagen}}" alt="img" width="200px" />
-    <h3> Titulo: {{this.titulo}}</h3>
-    <p> Descripción:{{this.descripcion}}</p>
-    <p> URL:{{this.url}}</p>
+    <div class="card p-2" style="width: 300px;">
+        <img class="mx-auto" src="{{this.imagen}}" alt="img" width="200px" />
+        <h4 style="margin-top: 5px; margin-bottom: 5px;"> {{this.titulo}}</h4>
+        <p> {{this.descripcion}}</p>
+        <div class="mx-auto">
+        <a href="{{this.url}}"> <button class="btn btn-primary mx-auto"> Jugar </button></a>
+        </div>
+    </div>
 {{/each}}
+</div>

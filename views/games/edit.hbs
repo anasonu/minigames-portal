@@ -1,35 +1,35 @@
-<h1> Pagina de edicion del juego </h1>
+<h1 style="margin-top: 15px; margin-bottom: 25px;"> Pagina de edicion del juego </h1>
 
 <form action="/games/{{gameEdit._id}}/edit-image" method="POST" enctype="multipart/form-data">
-    <label for="imagen"> Imagen de portada: </label>
-    <input type="file" name="imagen" />
-
-    <button> Guardar imagen </button>   
-
+<div class="mb-3">
+    <label class="form-label" for="imagen"> Imagen de portada: </label>
+    <input class="form-control" type="file" name="imagen" />
+</div>
+    <button class="btn btn-primary mb-3"> Guardar imagen </button>   
 </form>
 
-<br>
-{{errorMessage}}
-<br>
-<br>
+<p class="fw-semibold"> {{errorMessage}} </p>
 
 <form action="/games/{{gameEdit._id}}/edit" method="POST">
-    <label for="titulo"> Titulo: </label>
-    <input type="text" name="titulo" value="{{gameEdit.titulo}}" />
-    <br />
-    <label for="descripcion"> Descripción: </label>
-    <input type="text" name="descripcion" value="{{gameEdit.descripcion}}" />
-    <br />
-    <label for="url"> URL: </label>
-    <input type="text" name="url" value="{{gameEdit.url}}" />
-    <br />
+<div class="mb-3">
+    <label class="form-label" for="titulo"> Titulo: </label>
+    <input class="form-control" type="text" name="titulo" value="{{gameEdit.titulo}}" />
+</div>
+<div class="mb-3">
+    <label class="form-label" for="descripcion"> Descripción: </label>
+    <input class="form-control" type="text" name="descripcion" value="{{gameEdit.descripcion}}" />
+</div>
+<div class="mb-3">
+    <label class="form-label" for="url"> URL: </label>
+    <input class="form-control" type="text" name="url" value="{{gameEdit.url}}" />
+</div>
 
-    <button> Guardar cambios </button>
+    <button class="btn btn-primary mb-3"> Guardar cambios </button>
     
 </form>
 
 <form action="/games/{{gameEdit._id}}/delete" method="POST">
-    <button> Borrar </button>
+    <button class="btn btn-danger mb-3"> Borrar </button>
 </form>
 
 {{!-- <img src="{{gameDetails.imagen}}" alt="img" width="200px"> <br /> --}}
