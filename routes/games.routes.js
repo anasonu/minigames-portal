@@ -18,7 +18,8 @@ router.post("/create", uploader.single("imagen"), async (req, res, next) => {
   const { imagen, titulo, creador, descripcion, url } = req.body;
   const { _id } = req.session.user;
 
-  if(!imagen || !titulo || ! descripcion || !url) {
+  if(!titulo || ! descripcion || !url) {
+    // console.log(imagen);
     res.render("games/add.hbs", {
         errorMessage: "¡Ups! Parece que hay campos sin rellenar"
     })
