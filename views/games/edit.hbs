@@ -17,7 +17,8 @@
 </div>
 <div class="mb-3">
     <label class="form-label" for="descripcion"> Descripción: </label>
-    <input class="form-control" type="text" name="descripcion" value="{{gameEdit.descripcion}}" />
+    {{!-- <input class="form-control" type="text" name="descripcion" value="{{gameEdit.descripcion}}" /> --}}
+    <textarea class="form-control" name="descripcion" rows="4" cols="50">{{gameEdit.descripcion}}</textarea>
 </div>
 <div class="mb-3">
     <label class="form-label" for="url"> URL: </label>

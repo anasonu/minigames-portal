@@ -13,7 +13,7 @@
         <img class="mx-auto" src="{{this.imagen}}" alt="img" width="200px" />
         <h4 style="margin-top: 5px; margin-bottom: 5px;"> {{this.titulo}}</h4>
         <p> {{this.descripcion}}</p>
-        <a class="btn btn-primary" href="{{this.url}}"> Jugar </a>
+        <a class="btn btn-primary" href="/games/{{this._id}}/details"> Jugar </a>
     </div>
 {{/each}}
 </div>
@@ -25,7 +25,7 @@
         <img class="mx-auto" src="{{this.imagen}}" alt="img" width="200px" />
         <h4 style="margin-top: 5px; margin-bottom: 5px;"> {{this.titulo}}</h4>
         <p> {{this.descripcion}}</p>
-        <a href="{{this.url}}" class="btn btn-primary">Jugar </a>
+        <a href="/games/{{this._id}}/details" class="btn btn-primary">Jugar </a>
     </div>
 {{/each}}
 </div>
