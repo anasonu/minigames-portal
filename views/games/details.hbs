@@ -1,9 +1,18 @@
-<h1 style="margin-top: 15px; margin-bottom: 25px;"> Detalles del juego </h1>
+
+<div class="d-flex justify-content-between align-items-center">
+    <h1 style="margin-top: 15px; margin-bottom: 25px;"> Detalles del juego </h1>
+    {{#if esCreador}}
+        <a href="/games/{{gameDetails._id}}/edit">
+            <button class="btn btn-warning"> Editar detalles </button>
+        </a>
+    {{/if}}
+</div>
 
 <div class="card" style="border: none;">
 <img class="img-fluid" src="{{gameDetails.imagen}}" alt="img" > <br />
 <div class="d-flex justify-content-between" >
-<p class="fs-1 text"> {{gameDetails.titulo}}</p>
+<p class="fs-1 text" style="margin-bottom: 10px;"> {{gameDetails.titulo}}</p>
+    
     <div class="d-flex gap-3">
         <a target="_blank" href="{{gameDetails.url}}" class="fs-5 text"> <button type="button" class="btn btn-primary"> ¡Ve a la página oficial! </button></a>
 
@@ -27,8 +36,11 @@
 
 </div>
 
-<p class="fs-3 text"> {{gameDetails.creador.username}} </p>
+<p class="fs-5 text"> Subido por: {{gameDetails.creador.username}} </p>
+<br >
 <p class="fs-5 text"> {{gameDetails.descripcion}}</p>
+
+<br >
 
         <iframe id="inlineFrameExample"
             title="Inline Frame Example"
@@ -39,16 +51,8 @@
 
 </div>
 
-
-<br>
-{{#if esCreador}}
-    <a href="/games/{{gameDetails._id}}/edit">
-        <button class="btn btn-warning"> Editar detalles </button>
-    </a>
-{{/if}}
-
-<br>
-<br>
+<br >
+<br >
 
 {{!-- <b>Prueba fuera: </b> {{esPropietario}} --}}
 
