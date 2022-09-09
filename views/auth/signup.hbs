@@ -1,24 +1,27 @@
-<h2 style="margin-top: 15px; margin-bottom: 25px;">Regístrate</h2>
+<div class="d-flex justify-content-center align-items-center">
+  <div>
+    <h2 class="fs-5 text fw-bold mb-5">Regístrate</h2>
+    <form action="/signup" method="post">
+      <div class="mb-3">
+        <label class="form-label" for="username">Nombre de usuario:</label>
+        <input class="form-control" style="width:400px" type="text" name="username" />
+      </div>
 
-<form action="/signup" method="post">
-<div class="mb-3">
-    <label class="form-label" for="username">Nombre de usuario:</label>
-    <input class="form-control" type="text" name="username">
+      <div class="mb-3">
+        <label class="form-label" for="email">Correo electrónico:</label>
+        <input class="form-control" type="email" name="email" />
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label" for="password">Password:</label>
+        <input class="form-control" type="password" name="password" />
+      </div>
+
+      <button class="btn btn-primary mb-3">Registrarme</button>
+
+      <br />
+
+      <p style="color:red">{{errorMessage}} </p>
+    </form>
+  </div>
 </div>
-
-<div class="mb-3">
-    <label class="form-label" for="email">Correo electrónico:</label>
-    <input class="form-control" type="email" name="email">
-</div>
-
-<div class="mb-3">
-    <label class="form-label" for="password">Password:</label>
-    <input class="form-control" type="password" name="password">
-</div>
-
-    <button class="btn btn-primary mb-3" >Registrarme</button>
-    
-    <br>
-
-    <p style="color:red">{{errorMessage}} </p>
-</form>

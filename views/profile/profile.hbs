@@ -1,31 +1,50 @@
-<h1 style="margin-top: 15px; margin-bottom: 25px;"> Tu perfil </h1>
-        <h5> {{userInfo.username}} </h5>
-        <h5> {{userInfo.email}} </h5>
-    <a href="/profile/{{userInfo._id}}/edit">
-        <button class="btn btn-primary"> Editar mis datos</button>
-    </a>
+<h1 class="fs-5 text fw-bold mb-5"> Mi perfil </h1>
+<h5 class="fs-6 text"> {{userInfo.username}} </h5>
+<h5 class="fs-6 text mb-4"> {{userInfo.email}} </h5>
+<a href="/profile/{{userInfo._id}}/edit">
+  <button class="btn btn-primary mb-5"> Editar mis datos</button>
+</a>
 
-    
-<h1 style="margin-top: 15px; margin-bottom: 25px;"> Tus juegos </h1>
-<div class="d-flex flex-wrap gap-3">
-{{#each gamesInfo}}
-    <div class="card p-2" style="width: 300px;">
-        <img class="mx-auto" src="{{this.imagen}}" alt="img" width="200px" />
-        <h4 style="margin-top: 5px; margin-bottom: 5px;"> {{this.titulo}}</h4>
-        <p> {{this.descripcion}}</p>
-        <a class="btn btn-primary" href="/games/{{this._id}}/details"> Jugar </a>
+<h1 class="fs-5 text fw-bold mb-4"> Mis juegos subidos </h1>
+<div class="d-flex flex-wrap gap-3 mb-5">
+  {{#each gamesInfo}}
+    <div class="eachGame p-3 card" style="width: 300px;">
+      <img
+        class="card-img-top"
+        style="max-height: 150px;"
+        src="{{this.imagen}}"
+        alt="img"
+      />
+      <br />
+      <h5 class="card-title">{{this.titulo}}</h5>
+      <h6 class="card-subtitle mb-2 text-muted">
+        {{this.creador.username}}</h6>
+      <p class="card-text text-truncate"> {{this.descripcion}} </p>
+      <a href="/games/{{this.id}}/details" class="btn btn-primary">
+        Ver más
+      </a>
     </div>
-{{/each}}
+  {{/each}}
 </div>
 
-<h1 style="margin-top: 15px; margin-bottom: 25px;"> Tus favoritos </h1>
+<h1 class="fs-5 text fw-bold mb-4"> Tus favoritos </h1>
 <div class="d-flex flex-wrap gap-3">
-{{#each favInfo}}
-    <div class="card p-2" style="width: 300px;">
-        <img class="mx-auto" src="{{this.imagen}}" alt="img" width="200px" />
-        <h4 style="margin-top: 5px; margin-bottom: 5px;"> {{this.titulo}}</h4>
-        <p> {{this.descripcion}}</p>
-        <a href="/games/{{this._id}}/details" class="btn btn-primary">Jugar </a>
+  {{#each favInfo}}
+    <div class="eachGame p-3 card" style="width: 300px;">
+      <img
+        class="card-img-top"
+        style="max-height: 150px;"
+        src="{{this.imagen}}"
+        alt="img"
+      />
+      <br />
+      <h5 class="card-title">{{this.titulo}}</h5>
+      <h6 class="card-subtitle mb-2 text-muted">
+        {{this.creador.username}}</h6>
+      <p class="card-text text-truncate"> {{this.descripcion}} </p>
+      <a href="/games/{{this.id}}/details" class="btn btn-primary">
+        Ver más
+      </a>
     </div>
-{{/each}}
+  {{/each}}
 </div>

@@ -1,12 +1,12 @@
-<h1 style="margin-top: 15px; margin-bottom: 25px;"> Listado de juegos </h1>
+{{!-- <h1 style="margin-top: 15px; margin-bottom: 25px;"> Listado de juegos </h1> --}}
 
 <div class="d-flex flex-wrap gap-5">
 {{#each listGames}}
     <div class="eachGame p-3 card" style="width: 300px;" >
-        <img class="card-img-top" src="{{this.imagen}}" alt="img"> <br>
+        <img class="card-img-top" style="max-height: 150px;" src="{{this.imagen}}" alt="img"> <br>
         <h5 class="card-title">{{this.titulo}}</h5>
         <h6 class="card-subtitle mb-2 text-muted"> {{this.creador.username}}</h6>
-        <p class="card-text"> {{this.descripcion}} </p>
+        <p class="card-text text-truncate"> {{this.descripcion}} </p>
         {{!-- <p> <a href="{{this.url}}"> Enlace al juego</a></p> --}}
             <a href="/games/{{this.id}}/details" class="btn btn-primary"> Ver más </a>
 

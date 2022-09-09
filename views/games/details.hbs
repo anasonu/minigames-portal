@@ -1,88 +1,134 @@
-
-<div class="d-flex justify-content-between align-items-center">
-    <h1 style="margin-top: 15px; margin-bottom: 25px;"> Detalles del juego </h1>
-    {{#if esCreador}}
-        <a href="/games/{{gameDetails._id}}/edit">
-            <button class="btn btn-warning"> Editar detalles </button>
-        </a>
-    {{/if}}
+<div class="d-flex justify-content-end align-items-center mb-2">
+  {{! <h1 style="margin-top: 15px; margin-bottom: 25px; font-size: 20px">
+    Detalles del juego
+  </h1> }}
+  {{#if esCreador}}
+    <a href="/games/{{gameDetails._id}}/edit">
+      <button class="btn btn-warning"> Editar detalles </button>
+    </a>
+  {{/if}}
 </div>
 
-<div class="card" style="border: none;">
-<img class="img-fluid" src="{{gameDetails.imagen}}" alt="img" > <br />
-<div class="d-flex justify-content-between" >
-<p class="fs-1 text" style="margin-bottom: 10px;"> {{gameDetails.titulo}}</p>
-    
-    <div class="d-flex gap-3">
-        <a target="_blank" href="{{gameDetails.url}}" class="fs-5 text"> <button type="button" class="btn btn-primary"> ¡Ve a la página oficial! </button></a>
+<div class="d-flex justify-content-center">
 
-    <form action="/games/favourites/{{gameDetails._id}}" method="POST">
-        <button style="border: none; background: none; "> 
+  <div class="card" style="border: none; width: 80%; margin">
+    <img
+      class="img-fluid"
+      src="{{gameDetails.imagen}}"
+      alt="img"
+      style="max-width:300px"
+    />
+    <br />
+    <br />
+    <div class="d-flex justify-content-between">
+      <p class="fs-4 text" style="margin-bottom: 10px;">
+        {{gameDetails.titulo}}</p>
+
+      <div class="d-flex gap-3">
+        <a target="_blank" href="{{gameDetails.url}}" class="fs-5 text">
+          <button type="button" class="btn btn-primary">
+            ¡Ve a la página oficial!
+          </button></a>
+
+        <form action="/games/favourites/{{gameDetails._id}}" method="POST">
+          <button style="border: none; background: none; ">
             {{#if esFavorito}}
 
-            <img src="https://res.cloudinary.com/dmrjy3ynh/image/upload/v1652973228/games-portal/fav_ongx4k.png" alt="fav"> 
+              <img
+                src="https://res.cloudinary.com/dmrjy3ynh/image/upload/v1652973228/games-portal/fav_ongx4k.png"
+                alt="fav"
+              />
 
             {{else}}
 
-            <img src="https://res.cloudinary.com/dmrjy3ynh/image/upload/v1652973228/games-portal/nofav_zfuoql.png" alt="nofav"> 
-            
+              <img
+                src="https://res.cloudinary.com/dmrjy3ynh/image/upload/v1652973228/games-portal/nofav_zfuoql.png"
+                alt="nofav"
+              />
+
             {{/if}}
 
-        </button>
-    </form>
+          </button>
+        </form>
 
+      </div>
 
     </div>
 
+    <p class="fs-6 text" style="color:gray;">
+      Subido por:
+      {{gameDetails.creador.username}}
+    </p>
+    <br />
+    <p class="fs-6 text"> {{gameDetails.descripcion}}</p>
+
+    <hr class="mb-5" />
+
+    <iframe
+      id="inlineFrameExample"
+      title="Inline Frame Example"
+      width="100%"
+      height="1000"
+      src="{{gameDetails.url}}"
+    >
+    </iframe>
+
+  </div>
 </div>
 
-<p class="fs-5 text"> Subido por: {{gameDetails.creador.username}} </p>
-<br >
-<p class="fs-5 text"> {{gameDetails.descripcion}}</p>
-
-<hr >
-
-        <iframe id="inlineFrameExample"
-            title="Inline Frame Example"
-            width="100%"
-            height="1000"
-            src="{{gameDetails.url}}">
-        </iframe>
-
-</div>
-
-<br >
-<br >
+{{! <br />
+<br /> }}
 
 {{!-- <b>Prueba fuera: </b> {{esPropietario}} --}}
+<div class="d-flex justify-content-start" style="margin-left:10%;">
+  <div style="width:40%">
+    <p class="fs-5 text fw-bold mb-4">Comentarios</p>
+    {{#each commentList}}
+      <div>
+        <p class="text-multed"><span class="fw-bold">{{this.username.username}}</span>, dice: </p>
+        <p class="fw-normal">{{this.message}}</p>
+      </div>
 
-{{#each commentList}}
-    <p class="text-multed">{{this.username.username}}, dice: </p>
-    <p class="fw-normal">{{this.message}}</p>
-
-    {{#if this.esPropietario}}
-        <form action="/games/{{this.gameId}}/details/comment/{{this._id}}" method="post">
+      {{#if this.esPropietario}}
+        <div>
+          <form
+            action="/games/{{this.gameId}}/details/comment/{{this._id}}"
+            method="post"
+          >
             <button class="btn btn-danger mb-3">Eliminar</button>
-        </form>
-    {{/if}}
-    <hr>
-{{/each}}
+          </form>
+        </div>
+      {{/if}}
+      <hr />
+    {{/each}}
 
-<br>
-<br>
+    <br />
+    <br />
 
-
-{{#if usuarioLoggeado}}
-    <form action="/games/{{gameDetails._id}}/details/comment" method="post">
-    <div class="mb-3">
-        <label for="username" class="form-label">Usuario: </label>
-        <input class="form-control" type="text" name="username" value="{{userComment}}" disabled>
-    </div>
-    <div class="mb-3">
-        <label for="message" class="form-label">Comentario: </label>
-        <textarea class="form-control" name="message" rows="4" cols="50"></textarea>
-    </div>
+    {{#if usuarioLoggeado}}
+      <form action="/games/{{gameDetails._id}}/details/comment" method="post">
+        <div class="mb-3">
+          <label for="username" class="form-label">Usuario: </label>
+          <input
+            class="form-control"
+            type="text"
+            name="username"
+            value="{{userComment}}"
+            disabled
+          />
+        </div>
+        <div class="mb-3">
+          <label for="message" class="form-label">Comentario: </label>
+          <textarea
+            class="form-control"
+            name="message"
+            rows="4"
+            cols="50"
+          ></textarea>
+        </div>
 
         <button class="btn btn-success mb-3">Añadir comentario</button>
-    </form> 
-{{/if}}
+      </form>
+    {{/if}}
+  </div>
+</div>

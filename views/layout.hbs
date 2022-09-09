@@ -15,7 +15,7 @@
 
    <body>
 
-      <nav class="navbar navbar-expand-lg d-flex justify-content-between" style="margin-right: 50px;">
+      <nav class="navbar navbar-expand-lg d-flex justify-content-between mb-5" style="margin-right: 50px;">
          <a class="navbar-brand" href="/">Inicio</a>
 
 
@@ -24,7 +24,7 @@
             <a class="navbar-brand" href="/user/create">Crear usuarios</a>
          {{/if}}
       <form class="d-flex" role="search" action="/games/listSearch" method="POST">
-         <input style="width: 190%;" class="form-control me-2" type="text" name="buscador" placeholder="Busca el juego que quieras">
+         <input style="width: 400px;" class="form-control me-2" type="text" name="buscador" placeholder="Busca el juego que quieras">
          <button class="btn btn-outline-success"> Buscar </button>
       </form>
 
@@ -45,15 +45,6 @@
                      </li>
                   </ul>
                </li>
-
-            {{!-- <a class="navbar-brand" href="/profile">Perfil</a>
-            <a class="navbar-brand" href="/games/create">Añade tu juego</a>
-            <br>
-            <br>
-            <form action="/login/logout" method="post">
-               <button>Cerrar sesión</button>
-            </form>
-            <br> --}}
          {{else}}
             <div>
                <a class="navbar-brand" href="/login">Log in</a>
